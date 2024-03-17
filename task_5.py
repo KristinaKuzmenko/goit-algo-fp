@@ -51,7 +51,7 @@ def draw_tree(tree_root, title="Tree"):
 
 
 def generate_color(index, total):
-    base_color = (70, 70, 255)  # Базовий колір
+    base_color = (90, 90, 255)  # Базовий колір
     intensity_factor = index / total  # Фактор інтенсивності
     new_color = tuple(
         int(base_color[i] + (255 - base_color[i]) * intensity_factor) for i in range(3)
@@ -73,15 +73,15 @@ def bfs_with_colors(root, total):
     queue = deque([(root, 0)])
 
     while queue:  # Поки черга не порожня, продовжуємо обхід
-        node, level = queue.popleft()
+        node, index = queue.popleft()
         if node.id not in visited:
-            node.color = generate_color(level, total)
+            node.color = generate_color(index, total)
             visited.append(node.id)
 
             if node.left:
-                queue.append((node.left, level + 2))
+                queue.append((node.left, index + 2))
             if node.right:
-                queue.append((node.right, level + 2))
+                queue.append((node.right, index + 3))
 
 
 def dfs_with_colors(node, visited=None, index=0, total=0):
